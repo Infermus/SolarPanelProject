@@ -1,6 +1,7 @@
 ﻿using SolarPanelProject.Models.Port;
 using System;
 using System.IO.Ports;
+using System.Windows.Forms;
 
 namespace SolarPanelProject.Port
 {
@@ -54,8 +55,10 @@ namespace SolarPanelProject.Port
 
             try
             {
+                MainWindow mainWindow = (MainWindow)Application.OpenForms["MainWindow"];
                 SendDataToCom(operationType);
                 dateFromCom = myport.ReadLine();
+                mainWindow.DisplayPortDataInLogger(operationType, dateFromCom);
             }
 
             catch (Exception ex)

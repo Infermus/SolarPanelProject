@@ -12,9 +12,11 @@ using System.Windows.Forms;
 
 namespace SolarPanelProject
 {
+
     public partial class MainWindow : Form
     {
         PortConnector portConnector = new PortConnector();
+
 
         public MainWindow()
         {
@@ -72,15 +74,14 @@ namespace SolarPanelProject
                                                                     arduinoRequests.GetDataFromArduinoGPSModule(portConnector) :
                                                                     arduinoRequests.SetLocalizationDataByUserInput(LatitudeTextBox.Text, LongitudeTextBox.Text, portConnector);
 
-
                 var processedUriAdress = requestLinkFormater.GenerateLocationIQLink(userLocalization);
 
                 var jsonApiData = client.GetStringAsync(processedUriAdress).Result;
                 var parsedApiData = JsonConvert.DeserializeObject<Localization>(jsonApiData.ToString());
 
                 //portConnector.SendDataToCom("ResetServo");
-                DialogResult result = MessageBox.Show("Please calibrate compass to the south. When you are ready press 'OK' button.", "Configuration",
-                                             MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
+                //DialogResult result = MessageBox.Show("Please calibrate compass to the south. When you are ready press 'OK' button.", "Configuration",
+                //                             MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
 
             }
 
@@ -88,6 +89,11 @@ namespace SolarPanelProject
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        internal void DisplayPortDataInLogger(string inputData, string outputData)
+        {
+            PortDataLoggerTextBox.AppendText("InputData: " + inputData + "/OutputData: " + outputData + "\n");
         }
     }
 }
