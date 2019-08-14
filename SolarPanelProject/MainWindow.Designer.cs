@@ -46,12 +46,14 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
+            this.PortDataLoggerTextBox = new System.Windows.Forms.RichTextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // PortTextBox
             // 
             this.PortTextBox.FormattingEnabled = true;
-            this.PortTextBox.Location = new System.Drawing.Point(286, 49);
+            this.PortTextBox.Location = new System.Drawing.Point(365, 46);
             this.PortTextBox.Name = "PortTextBox";
             this.PortTextBox.Size = new System.Drawing.Size(121, 21);
             this.PortTextBox.TabIndex = 0;
@@ -59,7 +61,7 @@
             // ParityTextBox
             // 
             this.ParityTextBox.FormattingEnabled = true;
-            this.ParityTextBox.Location = new System.Drawing.Point(286, 76);
+            this.ParityTextBox.Location = new System.Drawing.Point(365, 73);
             this.ParityTextBox.Name = "ParityTextBox";
             this.ParityTextBox.Size = new System.Drawing.Size(121, 21);
             this.ParityTextBox.TabIndex = 1;
@@ -67,7 +69,7 @@
             // StopBitsTextBox
             // 
             this.StopBitsTextBox.FormattingEnabled = true;
-            this.StopBitsTextBox.Location = new System.Drawing.Point(286, 103);
+            this.StopBitsTextBox.Location = new System.Drawing.Point(365, 100);
             this.StopBitsTextBox.Name = "StopBitsTextBox";
             this.StopBitsTextBox.Size = new System.Drawing.Size(121, 21);
             this.StopBitsTextBox.TabIndex = 2;
@@ -75,7 +77,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(249, 52);
+            this.label1.Location = new System.Drawing.Point(328, 49);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(26, 13);
             this.label1.TabIndex = 3;
@@ -84,7 +86,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(242, 79);
+            this.label2.Location = new System.Drawing.Point(321, 76);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(33, 13);
             this.label2.TabIndex = 4;
@@ -93,7 +95,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(234, 106);
+            this.label3.Location = new System.Drawing.Point(313, 103);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(49, 13);
             this.label3.TabIndex = 5;
@@ -102,7 +104,7 @@
             // DataBitsTextBox
             // 
             this.DataBitsTextBox.FormattingEnabled = true;
-            this.DataBitsTextBox.Location = new System.Drawing.Point(286, 130);
+            this.DataBitsTextBox.Location = new System.Drawing.Point(365, 127);
             this.DataBitsTextBox.Name = "DataBitsTextBox";
             this.DataBitsTextBox.Size = new System.Drawing.Size(121, 21);
             this.DataBitsTextBox.TabIndex = 6;
@@ -110,7 +112,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(233, 133);
+            this.label4.Location = new System.Drawing.Point(312, 130);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 13);
             this.label4.TabIndex = 7;
@@ -118,7 +120,7 @@
             // 
             // BaudRateTextBox
             // 
-            this.BaudRateTextBox.Location = new System.Drawing.Point(288, 23);
+            this.BaudRateTextBox.Location = new System.Drawing.Point(367, 20);
             this.BaudRateTextBox.Name = "BaudRateTextBox";
             this.BaudRateTextBox.Size = new System.Drawing.Size(100, 20);
             this.BaudRateTextBox.TabIndex = 8;
@@ -127,7 +129,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(225, 26);
+            this.label5.Location = new System.Drawing.Point(304, 23);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(58, 13);
             this.label5.TabIndex = 9;
@@ -136,7 +138,7 @@
             // Rts
             // 
             this.Rts.AutoSize = true;
-            this.Rts.Location = new System.Drawing.Point(275, 168);
+            this.Rts.Location = new System.Drawing.Point(354, 165);
             this.Rts.Name = "Rts";
             this.Rts.Size = new System.Drawing.Size(42, 17);
             this.Rts.TabIndex = 10;
@@ -145,7 +147,7 @@
             // 
             // OpenPortButton
             // 
-            this.OpenPortButton.Location = new System.Drawing.Point(332, 168);
+            this.OpenPortButton.Location = new System.Drawing.Point(411, 165);
             this.OpenPortButton.Name = "OpenPortButton";
             this.OpenPortButton.Size = new System.Drawing.Size(75, 23);
             this.OpenPortButton.TabIndex = 11;
@@ -155,7 +157,7 @@
             // 
             // Start
             // 
-            this.Start.Location = new System.Drawing.Point(306, 259);
+            this.Start.Location = new System.Drawing.Point(385, 256);
             this.Start.Name = "Start";
             this.Start.Size = new System.Drawing.Size(101, 31);
             this.Start.TabIndex = 12;
@@ -204,11 +206,32 @@
             this.label8.TabIndex = 17;
             this.label8.Text = "Longitude";
             // 
+            // PortDataLoggerTextBox
+            // 
+            this.PortDataLoggerTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
+            this.PortDataLoggerTextBox.Location = new System.Drawing.Point(4, 139);
+            this.PortDataLoggerTextBox.Name = "PortDataLoggerTextBox";
+            this.PortDataLoggerTextBox.ReadOnly = true;
+            this.PortDataLoggerTextBox.Size = new System.Drawing.Size(277, 127);
+            this.PortDataLoggerTextBox.TabIndex = 18;
+            this.PortDataLoggerTextBox.Text = "";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(13, 123);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(88, 13);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Port Data Logger";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(419, 302);
+            this.ClientSize = new System.Drawing.Size(498, 300);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.PortDataLoggerTextBox);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -255,6 +278,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
+        public System.Windows.Forms.RichTextBox PortDataLoggerTextBox;
     }
 }
 
