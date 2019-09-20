@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CoordinateSharp, Version=1.1.5.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\CoordinateSharp.1.1.5.2\lib\net40\CoordinateSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -60,6 +63,11 @@
     <Compile Include="Enums\COMDataBits.cs" />
     <Compile Include="Enums\COMPorts.cs" />
     <Compile Include="Enums\LocationIQParams.cs" />
+    <Compile Include="Logic\AltitudeCalculations.cs" />
+    <Compile Include="Logic\AzimuthCalculations.cs" />
+    <Compile Include="Logic\Helpers.cs" />
+    <Compile Include="Logic\Others.cs" />
+    <Compile Include="Logic\SolarTimeCalculations.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
     </Compile>
