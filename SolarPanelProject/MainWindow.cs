@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using CoordinateSharp;
+using Newtonsoft.Json;
 using SolarPanelProject.Data;
 using SolarPanelProject.Enums;
+using SolarPanelProject.Logic;
 using SolarPanelProject.Models.LocationIQ;
 using SolarPanelProject.Models.Port;
 using SolarPanelProject.Port;
@@ -67,23 +69,22 @@ namespace SolarPanelProject
             try
             {
                 ArduinoRequests arduinoRequests = new ArduinoRequests();
-                RequestLinkFormater requestLinkFormater = new RequestLinkFormater();
-                HttpClient client = new HttpClient();
-
+                
                 List<KeyValuePair<string,float>> userLocalization = LatitudeTextBox.Text == string.Empty | LongitudeTextBox.Text == string.Empty ? 
                                                                     arduinoRequests.GetDataFromArduinoGPSModule(portConnector) :
                                                                     arduinoRequests.SetLocalizationDataByUserInput(LatitudeTextBox.Text, LongitudeTextBox.Text, portConnector);
 
-                var processedUriAdress = requestLinkFormater.GenerateLocationIQLink(userLocalization);
+                Uri processedUriAdress = new RequestLinkFormater().GenerateLocationIQLink(userLocalization);
 
-                var jsonApiData = client.GetStringAsync(processedUriAdress).Result;
-                var parsedApiData = JsonConvert.DeserializeObject<Localization>(jsonApiData.ToString());
+                string jsonApiData = new HttpClient().GetStringAsync(processedUriAdress).Result;
+                Localization parsedApiData = JsonConvert.DeserializeObject<Localization>(jsonApiData.ToString());
 
-                //portConnector.SendDataToCom("ResetServo");
-                //DialogResult result = MessageBox.Show("Please calibrate compass to the south. When you are ready press 'OK' button.", "Configuration",
-                //                             MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-
+                double magneticDeclination = new Others().CountEarthMagneticDeclination();
+                double hourAngle = new SolarTimeCalculations().HourAngle(parsedApiData.Longitude);
+                double sunAltitude = new AltitudeCalculations().CountCurrentSunAltitude(parsedApiData.Latitude, parsedApiData.Longitude, magneticDeclination, hourAngle);   
+                double sunAzimuth = new AzimuthCalculations().CalculateSunAzimuth(parsedApiData.Latitude, sunAltitude, magneticDeclination, hourAngle);
             }
+
 
             catch (Exception ex)
             {
