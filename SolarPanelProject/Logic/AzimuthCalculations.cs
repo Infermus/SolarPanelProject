@@ -16,12 +16,14 @@ namespace SolarPanelProject.Logic
         {
             Helpers helpers = new Helpers();
 
-            return helpers.ConvertRadiansToDegree(Math.Acos((Math.Sin(helpers.ConvertDegreeToRadians(magneticDeclination)) * 
+            var sunAzimuth =  helpers.ConvertRadiansToDegree(Math.Acos((Math.Sin(helpers.ConvertDegreeToRadians(magneticDeclination)) * 
                              Math.Cos(helpers.ConvertDegreeToRadians(latitude)) - 
                              (Math.Cos(helpers.ConvertDegreeToRadians(magneticDeclination)) * 
                              Math.Sin(helpers.ConvertDegreeToRadians(latitude)) * 
                              Math.Cos(helpers.ConvertDegreeToRadians(hourAngle)))) 
                              / Math.Cos(helpers.ConvertDegreeToRadians(sunAltitude))));
+
+            return hourAngle < 0 ? sunAzimuth : 360 - sunAzimuth;
         }
     }
 }
