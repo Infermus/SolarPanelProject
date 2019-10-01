@@ -75,6 +75,7 @@
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\LocationIQ\Localization.cs" />
+    <Compile Include="Models\Mappers\SolarCalculationResults.cs" />
     <Compile Include="Models\Port\PortConfiguration.cs" />
     <Compile Include="Configuration\OperationTypes.cs" />
     <Compile Include="Port\PortConnector.cs" />

@@ -1,10 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace SolarPanelProject.Logic
 {
     internal class SolarTimeCalculations
     {
         Helpers helpers = new Helpers();
+        /// <summary>
+        /// Returning List<KeyValuePair<string ,double>> with calculated solar times. 
+        /// </summary>
+        /// <param name="longitude"></param>
+        /// <returns></returns>
+        internal List<KeyValuePair<string, double>> CalculateSolarTimes (float longitude)
+        {
+            ///TODO Change method name
+            List<KeyValuePair<string, double>> solarTimeCalculations = new List<KeyValuePair<string, double>>();
+            {
+                solarTimeCalculations.Add(new KeyValuePair<string, double>("EoT",EquationOfTime()));
+                solarTimeCalculations.Add(new KeyValuePair<string, double>("TC", TimeCorrectionFactor(longitude, solarTimeCalculations[0].Value, 15 * TimeZoneInfo.Local.BaseUtcOffset.Hours)));
+                solarTimeCalculations.Add(new KeyValuePair<string, double>("LST", LocalSolarTime(solarTimeCalculations[1].Value)));
+                solarTimeCalculations.Add(new KeyValuePair<string, double>("HRA", HourAngle(longitude, solarTimeCalculations[2].Value)));
+            }
+
+            return solarTimeCalculations;
+        }
         /// <summary>
         /// Returns Equation of Time in minutes.
         /// </summary>
@@ -21,9 +40,8 @@ namespace SolarPanelProject.Logic
         /// <param name="longitude"></param>
         /// <param name="equationOftime"></param>
         /// <returns></returns>
-        internal double TimeCorrectionFactor(float longitude, double equationOftime)
+        internal double TimeCorrectionFactor(float longitude, double equationOftime, int localStandardTimeMeridian)
         {
-            int localStandardTimeMeridian = 15 * TimeZoneInfo.Local.BaseUtcOffset.Hours;
             return 4 * (longitude - localStandardTimeMeridian) + equationOftime;
         }
 
@@ -34,7 +52,8 @@ namespace SolarPanelProject.Logic
         /// <returns></returns>
         internal double LocalSolarTime(double timeCorrection)
         {
-            return ((DateTime.Now.Hour - 1) * 60 + DateTime.Now.Minute + (timeCorrection / 60)) / 60;
+           return DateTime.Now.IsDaylightSavingTime() ? ((DateTime.Now.Hour - 1) * 60 + DateTime.Now.Minute + (timeCorrection / 60)) / 60 : 
+                                                      ((DateTime.Now.Hour) * 60 + DateTime.Now.Minute + (timeCorrection / 60)) / 60;
         }
 
         /// <summary>
@@ -43,9 +62,9 @@ namespace SolarPanelProject.Logic
         /// </summary>
         /// <param name="longitude"></param>
         /// <returns></returns>
-        internal double HourAngle(float longitude)
+        internal double HourAngle(float longitude, double localSolarTime)
         {
-            return 15 * (LocalSolarTime(TimeCorrectionFactor(longitude, EquationOfTime())) - 12);
+            return 15 * (localSolarTime - 12);
         }
     }
 }

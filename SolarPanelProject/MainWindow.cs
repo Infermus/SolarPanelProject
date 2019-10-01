@@ -4,6 +4,7 @@ using SolarPanelProject.Data;
 using SolarPanelProject.Enums;
 using SolarPanelProject.Logic;
 using SolarPanelProject.Models.LocationIQ;
+using SolarPanelProject.Models.Logic;
 using SolarPanelProject.Models.Port;
 using SolarPanelProject.Port;
 using System;
@@ -68,7 +69,9 @@ namespace SolarPanelProject
         {
             try
             {
+                //temporary solutions
                 ArduinoRequests arduinoRequests = new ArduinoRequests();
+                Others others = new Others();
                 
                 List<KeyValuePair<string,float>> userLocalization = LatitudeTextBox.Text == string.Empty | LongitudeTextBox.Text == string.Empty ? 
                                                                     arduinoRequests.GetDataFromArduinoGPSModule(portConnector) :
@@ -79,12 +82,20 @@ namespace SolarPanelProject
                 string jsonApiData = new HttpClient().GetStringAsync(processedUriAdress).Result;
                 Localization parsedApiData = JsonConvert.DeserializeObject<Localization>(jsonApiData.ToString());
 
-                double magneticDeclination = new Others().CountEarthMagneticDeclination();
-                double hourAngle = new SolarTimeCalculations().HourAngle(parsedApiData.Longitude);
-                double sunAltitude = new AltitudeCalculations().CountCurrentSunAltitude(parsedApiData.Latitude, parsedApiData.Longitude, magneticDeclination, hourAngle);   
-                double sunAzimuth = new AzimuthCalculations().CalculateSunAzimuth(parsedApiData.Latitude, sunAltitude, magneticDeclination, hourAngle);
+                List<KeyValuePair<string,double>> solarTimeCalculations = new SolarTimeCalculations().CalculateSolarTimes(parsedApiData.Longitude);
+                SolarCalculationResults solarCalculationResults = new SolarCalculationResults()
+                {
+                    MagneticDeclination = others.CountEarthMagneticDeclination(),
+                    EquationOfTime = solarTimeCalculations[0].Value,
+                    TimeCorrectionFactor = solarTimeCalculations[1].Value,
+                    LocalSolarTime = solarTimeCalculations[2].Value,              
+                    HourAngle = solarTimeCalculations[3].Value,
+                };
+                solarCalculationResults.Altitude = new AltitudeCalculations().CountCurrentSunAltitude(parsedApiData.Latitude, parsedApiData.Longitude, solarCalculationResults.MagneticDeclination, solarCalculationResults.HourAngle);
+                solarCalculationResults.Azimuth = new AzimuthCalculations().CalculateSunAzimuth(parsedApiData.Latitude, solarCalculationResults.Altitude, solarCalculationResults.MagneticDeclination, solarCalculationResults.HourAngle);
+                solarCalculationResults.SunRise = others.SunRiseTimeCalculation(parsedApiData.Latitude, parsedApiData.Longitude, solarCalculationResults.MagneticDeclination, solarCalculationResults.EquationOfTime);
+                solarCalculationResults.SunSet = others.SunSetTimeCalculation(parsedApiData.Latitude, parsedApiData.Longitude, solarCalculationResults.MagneticDeclination, solarCalculationResults.EquationOfTime);
             }
-
 
             catch (Exception ex)
             {

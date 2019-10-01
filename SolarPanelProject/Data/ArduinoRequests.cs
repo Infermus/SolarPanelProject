@@ -21,7 +21,6 @@ namespace SolarPanelProject.Data
                                                                         parsedLatitude 
                                                                         : throw new System.InvalidCastException()));
             }
-
             return gpsData;
         }
 
