@@ -7,6 +7,7 @@ using SolarPanelProject.Models.LocationIQ;
 using SolarPanelProject.Models.Logic;
 using SolarPanelProject.Models.Port;
 using SolarPanelProject.Port;
+using SolarPanelProject.ServoControlManager;
 using System;
 using System.Collections.Generic;
 using System.IO.Ports;
@@ -65,7 +66,7 @@ namespace SolarPanelProject
             DataBitsTextBox.SelectedIndex = 3;
         }
 
-        private void Start_Click(object sender, EventArgs e)
+        private void Tracker(object sender, EventArgs e)
         {
             try
             {
@@ -95,6 +96,8 @@ namespace SolarPanelProject
                 solarCalculationResults.Azimuth = new AzimuthCalculations().CalculateSunAzimuth(parsedApiData.Latitude, solarCalculationResults.Altitude, solarCalculationResults.MagneticDeclination, solarCalculationResults.HourAngle);
                 solarCalculationResults.SunRise = others.SunRiseTimeCalculation(parsedApiData.Latitude, parsedApiData.Longitude, solarCalculationResults.MagneticDeclination, solarCalculationResults.EquationOfTime);
                 solarCalculationResults.SunSet = others.SunSetTimeCalculation(parsedApiData.Latitude, parsedApiData.Longitude, solarCalculationResults.MagneticDeclination, solarCalculationResults.EquationOfTime);
+                new ServoController().SetServoPosition("2", 100);
+
             }
 
             catch (Exception ex)
@@ -106,6 +109,11 @@ namespace SolarPanelProject
         internal void DisplayPortDataInLogger(string inputData, string outputData)
         {
             PortDataLoggerTextBox.AppendText("InputData: " + inputData + "/OutputData: " + outputData + "\n");
+        }
+
+        private void Photoresistors(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

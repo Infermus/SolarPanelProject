@@ -7,7 +7,7 @@ namespace SolarPanelProject.Port
 {
     internal class PortConnector
     {
-        private SerialPort myport;
+        private static SerialPort myport;
 
         internal void CreatePort()
         {

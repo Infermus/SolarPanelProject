@@ -40,7 +40,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.Rts = new System.Windows.Forms.CheckBox();
             this.OpenPortButton = new System.Windows.Forms.Button();
-            this.Start = new System.Windows.Forms.Button();
+            this.TrackerMode = new System.Windows.Forms.Button();
             this.LongitudeTextBox = new System.Windows.Forms.TextBox();
             this.LatitudeTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -48,6 +48,7 @@
             this.label8 = new System.Windows.Forms.Label();
             this.PortDataLoggerTextBox = new System.Windows.Forms.RichTextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.PhotoresistorsMode = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // PortTextBox
@@ -155,15 +156,15 @@
             this.OpenPortButton.UseVisualStyleBackColor = true;
             this.OpenPortButton.Click += new System.EventHandler(this.OpenPortButton_Click);
             // 
-            // Start
+            // TrackerMode
             // 
-            this.Start.Location = new System.Drawing.Point(385, 256);
-            this.Start.Name = "Start";
-            this.Start.Size = new System.Drawing.Size(101, 31);
-            this.Start.TabIndex = 12;
-            this.Start.Text = "Start";
-            this.Start.UseVisualStyleBackColor = true;
-            this.Start.Click += new System.EventHandler(this.Start_Click);
+            this.TrackerMode.Location = new System.Drawing.Point(385, 224);
+            this.TrackerMode.Name = "TrackerMode";
+            this.TrackerMode.Size = new System.Drawing.Size(101, 31);
+            this.TrackerMode.TabIndex = 12;
+            this.TrackerMode.Text = "Tracker";
+            this.TrackerMode.UseVisualStyleBackColor = true;
+            this.TrackerMode.Click += new System.EventHandler(this.Tracker);
             // 
             // LongitudeTextBox
             // 
@@ -171,6 +172,7 @@
             this.LongitudeTextBox.Name = "LongitudeTextBox";
             this.LongitudeTextBox.Size = new System.Drawing.Size(100, 20);
             this.LongitudeTextBox.TabIndex = 13;
+            this.LongitudeTextBox.Text = "16.13";
             // 
             // LatitudeTextBox
             // 
@@ -178,6 +180,7 @@
             this.LatitudeTextBox.Name = "LatitudeTextBox";
             this.LatitudeTextBox.Size = new System.Drawing.Size(100, 20);
             this.LatitudeTextBox.TabIndex = 14;
+            this.LatitudeTextBox.Text = "51.60";
             // 
             // label6
             // 
@@ -225,11 +228,22 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "Port Data Logger";
             // 
+            // PhotoresistorsMode
+            // 
+            this.PhotoresistorsMode.Location = new System.Drawing.Point(385, 261);
+            this.PhotoresistorsMode.Name = "PhotoresistorsMode";
+            this.PhotoresistorsMode.Size = new System.Drawing.Size(101, 31);
+            this.PhotoresistorsMode.TabIndex = 20;
+            this.PhotoresistorsMode.Text = "Photoresistors";
+            this.PhotoresistorsMode.UseVisualStyleBackColor = true;
+            this.PhotoresistorsMode.Click += new System.EventHandler(this.Photoresistors);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(498, 300);
+            this.Controls.Add(this.PhotoresistorsMode);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.PortDataLoggerTextBox);
             this.Controls.Add(this.label8);
@@ -237,7 +251,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.LatitudeTextBox);
             this.Controls.Add(this.LongitudeTextBox);
-            this.Controls.Add(this.Start);
+            this.Controls.Add(this.TrackerMode);
             this.Controls.Add(this.OpenPortButton);
             this.Controls.Add(this.Rts);
             this.Controls.Add(this.label5);
@@ -272,7 +286,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.CheckBox Rts;
         private System.Windows.Forms.Button OpenPortButton;
-        private System.Windows.Forms.Button Start;
+        private System.Windows.Forms.Button TrackerMode;
         private System.Windows.Forms.TextBox LongitudeTextBox;
         private System.Windows.Forms.TextBox LatitudeTextBox;
         private System.Windows.Forms.Label label6;
@@ -280,6 +294,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.RichTextBox PortDataLoggerTextBox;
+        private System.Windows.Forms.Button PhotoresistorsMode;
     }
 }
 
