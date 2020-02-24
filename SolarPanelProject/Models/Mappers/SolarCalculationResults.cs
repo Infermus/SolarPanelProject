@@ -1,23 +1,23 @@
 ﻿namespace SolarPanelProject.Models.Logic
 {
-    public class SolarCalculationResults
+    internal class SolarCalculationResults
     {
-        public double Altitude { get; set; }
+        internal double Altitude { get; set; }
 
-        public double Azimuth { get; set; }
+        internal double Azimuth { get; set; }
 
-        public double MagneticDeclination { get; set; }
+        internal double MagneticDeclination { get; set; }
 
-        public double SunRise { get; set; }
+        internal double SunRise { get; set; }
 
-        public double SunSet { get; set; }
+        internal double SunSet { get; set; }
 
-        public double EquationOfTime { get; set; }
+        internal double EquationOfTime { get; set; }
 
-        public double TimeCorrectionFactor { get; set; }
+        internal double TimeCorrectionFactor { get; set; }
 
-        public double LocalSolarTime { get; set; }
+        internal double LocalSolarTime { get; set; }
 
-        public double HourAngle { get; set; }
+        internal double HourAngle { get; set; }
     }
 }

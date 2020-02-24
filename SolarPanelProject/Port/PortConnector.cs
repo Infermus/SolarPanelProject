@@ -1,13 +1,16 @@
 ﻿using SolarPanelProject.Models.Port;
 using System;
 using System.IO.Ports;
+using System.Threading;
 using System.Windows.Forms;
+using SolarPanelProject.OutputMessages;
+using SolarPanelProject.Configuration;
 
 namespace SolarPanelProject.Port
 {
     internal class PortConnector
     {
-        private static SerialPort myport;
+        public static SerialPort myport;
 
         internal void CreatePort()
         {
@@ -32,49 +35,70 @@ namespace SolarPanelProject.Port
             }
             catch (Exception)
             {
-                
+
             }
         }
 
         internal bool OpenPort()
         {
-            if (myport.IsOpen == false)
+            try
             {
-                myport.Open();
-                return true;
+                if (myport.IsOpen == false)
+                {
+                    myport.Open();
+                    Thread.Sleep(100);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
+            catch (Exception ex)
             {
+                MainWindow mainWindow = (MainWindow)Application.OpenForms["MainWindow"];
+                mainWindow.DisplayPortDataInLogger(ex.Message);
                 return false;
             }
         }
 
-        internal string GetDataFromCom(string operationType)
+        internal bool IsPortOpen()
         {
-            string dateFromCom = string.Empty;
+            return myport.IsOpen;
+        }
 
+        internal string GetCurrentDataFromSerialPort()
+        {
             try
             {
-                MainWindow mainWindow = (MainWindow)Application.OpenForms["MainWindow"];
-                SendDataToCom(operationType);
-                dateFromCom = myport.ReadLine();
-                mainWindow.DisplayPortDataInLogger(operationType, dateFromCom);
+                if (myport.IsOpen && myport != null)
+                {
+                    Thread.Sleep(100);
+                    var receivedData = myport.ReadLine();
+                    return receivedData.Replace("\r", string.Empty);
+                }
+                else
+                {
+                    return InternalMessages.PortIsClosed;
+                }
             }
-
+            catch (TimeoutException)
+            {
+                return string.Empty;
+            }
             catch (Exception ex)
             {
-                dateFromCom = string.Empty;
+                return ex.Message;
             }
-            return dateFromCom;
         }
 
         internal void SendDataToCom(string dataToSend)
         {
-            if (myport != null)
+            if (myport != null && myport.IsOpen)
             {
+                Thread.Sleep(TimeConfigurations.PortSendingDataDelay);
                 myport.Write(dataToSend);
             }
         }
-
     }
 }

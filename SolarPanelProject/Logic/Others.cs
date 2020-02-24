@@ -22,7 +22,7 @@ namespace SolarPanelProject.Logic
         internal double SunRiseTimeCalculation(float latitude, float longitude, double magneticDeclination, double equationOfTime)
         {
             return 12.00 - (1.00 / 15.00) * (helpers.ConvertRadiansToDegree(Math.Acos(Math.Tan(-helpers.ConvertDegreeToRadians(latitude)) *
-                                            Math.Tan(helpers.ConvertDegreeToRadians(magneticDeclination))))) - 
+                                            Math.Tan(helpers.ConvertDegreeToRadians(magneticDeclination))))) -
                                             new SolarTimeCalculations().TimeCorrectionFactor(longitude, equationOfTime, 15 * TimeZoneInfo.Local.GetUtcOffset(DateTime.Now).Hours) / 60;
         }
 

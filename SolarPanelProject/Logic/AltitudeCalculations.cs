@@ -5,13 +5,8 @@ namespace SolarPanelProject.Logic
     internal class AltitudeCalculations
     {
         Helpers helpers = new Helpers();
-        /// <summary>
-        /// Returns current sun altitude/elevation in degrees.
-        /// </summary>
-        /// <param name="latitude"></param>
-        /// <param name="longitude"></param>
-        /// <returns></returns>
-        internal double CountCurrentSunAltitude(float latitude, float longitude, double magneticDeclination, double hourAngle)
+
+        internal double CountCurrentSunAltitude(float latitude, double magneticDeclination, double hourAngle)
         {
             return helpers.ConvertRadiansToDegree(Math.Asin(Math.Sin(helpers.ConvertDegreeToRadians(magneticDeclination)) * 
                                                             Math.Sin(helpers.ConvertDegreeToRadians(latitude)) + 
@@ -20,11 +15,6 @@ namespace SolarPanelProject.Logic
                                                             Math.Cos(helpers.ConvertDegreeToRadians(hourAngle))));
         }
 
-        /// <summary>
-        /// Returns maximum sun altitude
-        /// </summary>
-        /// <param name="latitude"></param>
-        /// <returns></returns>
         internal double CountMaximumSunAltitude(float latitude)
         {
             double maxAltitude = 90 + latitude - new Others().CountEarthMagneticDeclination();

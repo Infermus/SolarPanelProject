@@ -49,6 +49,10 @@
             this.PortDataLoggerTextBox = new System.Windows.Forms.RichTextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.PhotoresistorsMode = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.CitySelectTextBox = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.voltageCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // PortTextBox
@@ -58,6 +62,7 @@
             this.PortTextBox.Name = "PortTextBox";
             this.PortTextBox.Size = new System.Drawing.Size(121, 21);
             this.PortTextBox.TabIndex = 0;
+            this.PortTextBox.DropDown += new System.EventHandler(this.OnPort_DropDown);
             // 
             // ParityTextBox
             // 
@@ -139,7 +144,9 @@
             // Rts
             // 
             this.Rts.AutoSize = true;
-            this.Rts.Location = new System.Drawing.Point(354, 165);
+            this.Rts.Checked = true;
+            this.Rts.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.Rts.Location = new System.Drawing.Point(444, 154);
             this.Rts.Name = "Rts";
             this.Rts.Size = new System.Drawing.Size(42, 17);
             this.Rts.TabIndex = 10;
@@ -148,23 +155,23 @@
             // 
             // OpenPortButton
             // 
-            this.OpenPortButton.Location = new System.Drawing.Point(411, 165);
+            this.OpenPortButton.Location = new System.Drawing.Point(367, 177);
             this.OpenPortButton.Name = "OpenPortButton";
-            this.OpenPortButton.Size = new System.Drawing.Size(75, 23);
+            this.OpenPortButton.Size = new System.Drawing.Size(119, 34);
             this.OpenPortButton.TabIndex = 11;
-            this.OpenPortButton.Text = "Open Port";
+            this.OpenPortButton.Text = "Pair Serial Port";
             this.OpenPortButton.UseVisualStyleBackColor = true;
             this.OpenPortButton.Click += new System.EventHandler(this.OpenPortButton_Click);
             // 
             // TrackerMode
             // 
-            this.TrackerMode.Location = new System.Drawing.Point(385, 224);
+            this.TrackerMode.Location = new System.Drawing.Point(296, 257);
             this.TrackerMode.Name = "TrackerMode";
-            this.TrackerMode.Size = new System.Drawing.Size(101, 31);
+            this.TrackerMode.Size = new System.Drawing.Size(92, 31);
             this.TrackerMode.TabIndex = 12;
             this.TrackerMode.Text = "Tracker";
             this.TrackerMode.UseVisualStyleBackColor = true;
-            this.TrackerMode.Click += new System.EventHandler(this.Tracker);
+            this.TrackerMode.Click += new System.EventHandler(this.TrackerMode_Click);
             // 
             // LongitudeTextBox
             // 
@@ -172,7 +179,6 @@
             this.LongitudeTextBox.Name = "LongitudeTextBox";
             this.LongitudeTextBox.Size = new System.Drawing.Size(100, 20);
             this.LongitudeTextBox.TabIndex = 13;
-            this.LongitudeTextBox.Text = "16.13";
             // 
             // LatitudeTextBox
             // 
@@ -180,12 +186,11 @@
             this.LatitudeTextBox.Name = "LatitudeTextBox";
             this.LatitudeTextBox.Size = new System.Drawing.Size(100, 20);
             this.LatitudeTextBox.TabIndex = 14;
-            this.LatitudeTextBox.Text = "51.60";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(57, 9);
+            this.label6.Location = new System.Drawing.Point(48, 9);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(113, 13);
             this.label6.TabIndex = 15;
@@ -212,17 +217,17 @@
             // PortDataLoggerTextBox
             // 
             this.PortDataLoggerTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.5F);
-            this.PortDataLoggerTextBox.Location = new System.Drawing.Point(4, 139);
+            this.PortDataLoggerTextBox.Location = new System.Drawing.Point(4, 166);
             this.PortDataLoggerTextBox.Name = "PortDataLoggerTextBox";
             this.PortDataLoggerTextBox.ReadOnly = true;
-            this.PortDataLoggerTextBox.Size = new System.Drawing.Size(277, 127);
+            this.PortDataLoggerTextBox.Size = new System.Drawing.Size(277, 122);
             this.PortDataLoggerTextBox.TabIndex = 18;
             this.PortDataLoggerTextBox.Text = "";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(13, 123);
+            this.label9.Location = new System.Drawing.Point(1, 150);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(88, 13);
             this.label9.TabIndex = 19;
@@ -230,19 +235,61 @@
             // 
             // PhotoresistorsMode
             // 
-            this.PhotoresistorsMode.Location = new System.Drawing.Point(385, 261);
+            this.PhotoresistorsMode.Location = new System.Drawing.Point(394, 257);
             this.PhotoresistorsMode.Name = "PhotoresistorsMode";
-            this.PhotoresistorsMode.Size = new System.Drawing.Size(101, 31);
+            this.PhotoresistorsMode.Size = new System.Drawing.Size(92, 31);
             this.PhotoresistorsMode.TabIndex = 20;
             this.PhotoresistorsMode.Text = "Photoresistors";
             this.PhotoresistorsMode.UseVisualStyleBackColor = true;
-            this.PhotoresistorsMode.Click += new System.EventHandler(this.Photoresistors);
+            this.PhotoresistorsMode.Click += new System.EventHandler(this.PhotoresistorsMode_Click);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(293, 232);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(74, 13);
+            this.label10.TabIndex = 23;
+            this.label10.Text = "Mode selector";
+            // 
+            // CitySelectTextBox
+            // 
+            this.CitySelectTextBox.FormattingEnabled = true;
+            this.CitySelectTextBox.Location = new System.Drawing.Point(167, 35);
+            this.CitySelectTextBox.Name = "CitySelectTextBox";
+            this.CitySelectTextBox.Size = new System.Drawing.Size(104, 21);
+            this.CitySelectTextBox.TabIndex = 24;
+            this.CitySelectTextBox.SelectedIndexChanged += new System.EventHandler(this.SetLocalizationBySelectedCity_DropDown);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(203, 9);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(24, 13);
+            this.label11.TabIndex = 25;
+            this.label11.Text = "City";
+            // 
+            // voltageCheckBox
+            // 
+            this.voltageCheckBox.AutoSize = true;
+            this.voltageCheckBox.Location = new System.Drawing.Point(115, 143);
+            this.voltageCheckBox.Name = "voltageCheckBox";
+            this.voltageCheckBox.Size = new System.Drawing.Size(99, 17);
+            this.voltageCheckBox.TabIndex = 26;
+            this.voltageCheckBox.Text = "Display Voltage";
+            this.voltageCheckBox.UseVisualStyleBackColor = true;
+            this.voltageCheckBox.CheckedChanged += new System.EventHandler(this.voltageCheckBox_CheckedChanged);
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(498, 300);
+            this.Controls.Add(this.voltageCheckBox);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.CitySelectTextBox);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.PhotoresistorsMode);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.PortDataLoggerTextBox);
@@ -295,6 +342,10 @@
         private System.Windows.Forms.Label label9;
         public System.Windows.Forms.RichTextBox PortDataLoggerTextBox;
         private System.Windows.Forms.Button PhotoresistorsMode;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox CitySelectTextBox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.CheckBox voltageCheckBox;
     }
 }
 

@@ -35,6 +35,9 @@
     <Reference Include="CoordinateSharp, Version=1.1.5.2, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\CoordinateSharp.1.1.5.2\lib\net40\CoordinateSharp.dll</HintPath>
     </Reference>
+    <Reference Include="kayChart, Version=0.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\kayChart.dll.0.4.7\lib\net45\kayChart.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -46,6 +49,7 @@
     <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -57,11 +61,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChartPlotter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChartPlotter.Designer.cs">
+      <DependentUpon>ChartPlotter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Configuration\ApiConf.cs" />
+    <Compile Include="Configuration\TimeConfigurations.cs" />
+    <Compile Include="Data\Wrappers.cs" />
+    <Compile Include="Enums\MessageCaptions.cs" />
+    <Compile Include="Models\Cities.cs" />
+    <Compile Include="Output Messages\InternalMessages.cs" />
     <Compile Include="Data\ArduinoRequests.cs" />
     <Compile Include="Data\RequestLinkFormater.cs" />
     <Compile Include="Enums\COMDataBits.cs" />
-    <Compile Include="Enums\COMPorts.cs" />
     <Compile Include="Enums\LocationIQParams.cs" />
     <Compile Include="Logic\AltitudeCalculations.cs" />
     <Compile Include="Logic\AzimuthCalculations.cs" />
@@ -77,11 +91,13 @@
     <Compile Include="Models\LocationIQ\Localization.cs" />
     <Compile Include="Models\Mappers\SolarCalculationResults.cs" />
     <Compile Include="Models\Port\PortConfiguration.cs" />
-    <Compile Include="Configuration\OperationTypes.cs" />
+    <Compile Include="Configuration\ApplicationProtocol.cs" />
     <Compile Include="Port\PortConnector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServoControlManager\ServoController.cs" />
+    <EmbeddedResource Include="ChartPlotter.resx">
+      <DependentUpon>ChartPlotter.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
@@ -104,10 +120,16 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Scripts\jquery-2.1.1.min.map" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\jquery-2.1.1.js" />
+    <Content Include="Scripts\jquery-2.1.1.min.js" />
+    <Content Include="Scripts\nugetexample.js" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
