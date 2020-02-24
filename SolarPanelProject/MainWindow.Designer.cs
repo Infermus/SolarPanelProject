@@ -279,7 +279,7 @@
             this.voltageCheckBox.TabIndex = 26;
             this.voltageCheckBox.Text = "Display Voltage";
             this.voltageCheckBox.UseVisualStyleBackColor = true;
-            this.voltageCheckBox.CheckedChanged += new System.EventHandler(this.voltageCheckBox_CheckedChanged);
+            this.voltageCheckBox.CheckedChanged += new System.EventHandler(this.VoltageCheckBox_CheckedChanged);
             // 
             // MainWindow
             // 

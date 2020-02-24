@@ -195,18 +195,7 @@ namespace SolarPanelProject
             LongitudeTextBox.Text = Wrappers.citiesWrapper[dataIndex].Longitude.ToString();
         }
 
-        private void ChartButton_OnClick(object sender, EventArgs e)
-        {
-            if (PortConnector.myport.IsOpen == true)
-            {
-                ChartPlotter chartPlotter = new ChartPlotter();
-                chartPlotter.Show();
-            }
-            else
-                MessageBox.Show(InternalMessages.PortIsClosed, MessageCaptions.Information.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Warning);
-        }
-
-        private void voltageCheckBox_CheckedChanged(object sender, EventArgs e)
+        private void VoltageCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             if (voltageCheckBox.Checked)
             {

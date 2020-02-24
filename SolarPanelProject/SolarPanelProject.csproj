@@ -61,12 +61,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChartPlotter.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ChartPlotter.Designer.cs">
-      <DependentUpon>ChartPlotter.cs</DependentUpon>
-    </Compile>
     <Compile Include="Configuration\ApiConf.cs" />
     <Compile Include="Configuration\TimeConfigurations.cs" />
     <Compile Include="Data\Wrappers.cs" />
@@ -95,9 +89,6 @@
     <Compile Include="Port\PortConnector.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="ChartPlotter.resx">
-      <DependentUpon>ChartPlotter.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
